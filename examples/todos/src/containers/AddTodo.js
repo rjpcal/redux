@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { addTodo } from '../actions'
 
 let AddTodo = ({ dispatch }) => {
-  let input
+    let input
+    let prio
 
   return (
     <div>
@@ -12,11 +13,15 @@ let AddTodo = ({ dispatch }) => {
         if (!input.value.trim()) {
           return
         }
-        dispatch(addTodo(input.value))
-        input.value = ''
+          dispatch(addTodo(input.value, prio.value))
+          input.value = ''
+	  prio.value = ''
       }}>
         <input ref={node => {
           input = node
+        }} />
+        <input ref={node => {
+          prio = node
         }} />
         <button type="submit">
           Add Todo

@@ -5,9 +5,11 @@ const TodoList = ({ todos, onTodoClick }) => (
   <ul>
     {todos.map(todo =>
       <Todo
-        key={todo.id}
-        {...todo}
-        onClick={() => onTodoClick(todo.id)}
+               key={todo.id}
+	       theid={todo.id}
+	       prio={todo.prio}
+               {...todo}
+               onClick={() => onTodoClick(todo.id)}
       />
     )}
   </ul>
@@ -15,9 +17,10 @@ const TodoList = ({ todos, onTodoClick }) => (
 
 TodoList.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    completed: PropTypes.bool.isRequired,
-    text: PropTypes.string.isRequired
+      id: PropTypes.number.isRequired,
+      prio: PropTypes.number.isRequired,
+      completed: PropTypes.bool.isRequired,
+      text: PropTypes.string.isRequired
   }).isRequired).isRequired,
   onTodoClick: PropTypes.func.isRequired
 }

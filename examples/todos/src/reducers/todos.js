@@ -2,9 +2,10 @@ const todo = (state, action) => {
   switch (action.type) {
     case 'ADD_TODO':
       return {
-        id: action.id,
-        text: action.text,
-        completed: false
+          id: action.id,
+          text: action.text,
+	  prio: action.prio,
+          completed: false
       }
     case 'TOGGLE_TODO':
       if (state.id !== action.id) {
@@ -23,11 +24,15 @@ const todo = (state, action) => {
 const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
-      return [
+      var result = [
         ...state,
         todo(undefined, action)
-      ]
-    case 'TOGGLE_TODO':
+      ];
+      result.sort(function(a, b) {
+	  return b.prio - a.prio;
+      });
+      return result
+  case 'TOGGLE_TODO':
       return state.map(t =>
         todo(t, action)
       )
